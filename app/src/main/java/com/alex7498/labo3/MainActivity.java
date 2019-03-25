@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    private boolean f1,f2,f3;
 
     private String[] data = new String[4];
 
@@ -45,12 +46,14 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Debe ingresar un nombre de usuario", Toast.LENGTH_LONG).show();
             } else {
                 data[0] = mUsername.getText().toString();
+                f1 = true;
             }
 
             if (mPassword.getText().toString().equals("")) {
                 Toast.makeText(this, "Debe ingresar una contraseña", Toast.LENGTH_LONG).show();
             } else {
                 data[1] = mPassword.getText().toString();
+                f2 = true;
             }
 
             if (mEmail.getText().toString().equals("")) {
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 if (Patterns.EMAIL_ADDRESS.matcher(mEmail.getText()).matches()) {
                     data[2] = mEmail.getText().toString();
+                    f3 = true;
                 } else {
                     Toast.makeText(this, "Debe ingresar una direccion de correo valida", Toast.LENGTH_LONG).show();
                 }
@@ -74,8 +78,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-            mIntent.putExtra(AppConstants.T1, data);
-            startActivity(mIntent);
+            if(f1 && f2 && f3){
+                Toast.makeText(this, "funciona", Toast.LENGTH_LONG).show();
+                mIntent.putExtra(AppConstants.T1, data);
+                startActivity(mIntent);
+            }
         });
     }
 
